@@ -5,44 +5,88 @@
 #include <unistd.h>
 
 typedef struct report{
-	int timetaken;
-	int accuracy;
+	float timetaken;
+	float accuracy;
 	struct report *next;
 }report;
 
 report *head =NULL;
+int n=0;
 
-void calculate(int ,int ,int);
+void calculate(int ,int ,float);
 void begin();
 void knowmore();
 void nextwork();
 void choices();
 void store(report *);
+void sureexit();
+
+void sureexit(){
+	int c;
+	printf("are you sure you want to exit: all your progress will be lost.\n(1=HOMEPAGE | 0=Exit)");
+	scanf("%d", &c);
+	switch(c){
+		case 0: exit(5);
+			break;
+		case 1: choices();
+			break;
+		default:printf("wrong entry");
+			sureexit();
+	}
+}
 
 void store(report *ptr){
-	head = ptr;
-	head->next = NULL;
-	head = head->next;	
+	if (head==NULL){
+		head = ptr;
+		head->next = NULL;
+	}
+	else{
+		report *temp;
+		for(temp=head; temp->next != NULL; temp=temp->next);
+		temp->next = ptr;
+		ptr->next = NULL;
+	}
+	n +=1;
 }
 
 int homepage(void){
-	printf("WELCOME TO THE TYPING TUTOR!!");
-	sleep(2);
+	printf("\n\t\t\t\t\tWELCOME TO THE TYPING TUTOR!!");
 	printf("\n\nHere, we will work on your typing speed make you better and more accurate typist.");
 	printf("\n\nlet's start our journey to rise as the best typist of all times.");
-	printf("\n\nare you ready to begin?\n");
+	printf("\n\n\t\t\t\tare you ready to begin?\n");
 	choices();
 	
 }
 
-void freemem(){};
-void progress(){};
+void freemem(){
+	int i;
+	for(i=0; i<n; i++){
+		report *temp = head;
+		head= head->next;
+		free(temp);
+	}
+	n=0;
+	printf("progress erased");
+	choices();
+}
+
+void progress(){
+	report *temp;
+	printf("\n\nAccuracy through all your entries:");
+	for (temp=head; temp!=NULL; temp = temp->next)
+		printf("\t%lf", temp->accuracy);
+	printf("\n\nTime taken through all your entries:");	
+	for (temp=head; temp!=NULL; temp = temp->next)
+		printf("\t%lf", temp->timetaken);
+	choices();
+
+}
 
 void choices(){
 	int c;
-	printf("\n\npress 1 to begin.\npress 2 to view your progress.\n press 3 to erase all progress\npress 4 to know more about our workspace.\n\n");
+	printf("\n\npress 1 to begin.\npress 2 to view your progress.\npress 3 to erase all progress.\npress 4 to know more about our workspace.\npress 5 to exit.\n\n");
 	
-	scanf("%d", &c);
+	scanf(" %d", &c);
 	switch(c){
         	case 1: begin();
         	        break;
@@ -52,18 +96,21 @@ void choices(){
 			break;
         	case 4: knowmore();
                 	break;
+		case 5: sureexit();
+			break;
         	default:printf("please enter a valid option");
 			choices();
     	}
 }
 
 void begin(){
-	int correct=0, wrong=0, i, x, timetaken;
+	int correct=0, wrong=0, i, x;
+	float timetaken;
 	clock_t start, end;
 	char a[100], c ;
 	char b[]="HELLO TYPING TUTOR";
 	printf("enter the following words as it is as fast as you can:\n");
-	sleep(2);
+	sleep(1);
 	getchar();
 	printf("%s\n", b);
 	start= clock();
@@ -76,37 +123,36 @@ void begin(){
 	        else
 	            wrong++;
 	}
-	timetaken = (int)(end-start)/CLOCKS_PER_SEC;
+	timetaken = (float)(end-start)/10;
 	calculate(correct, wrong, timetaken);
 	nextwork();
 }
 
-void calculate(int correct,int wrong,int timetaken){
+void calculate(int correct,int wrong,float timetaken){
 	int per;
 	report *ptr;
 	ptr =(report*)malloc(sizeof(report*));
 	ptr->timetaken = timetaken;
 	printf("Right letters: %d\n", correct);
 	printf("wrong letters: %d\n", wrong);
-	printf("timetaken: %d\n", timetaken);
-	ptr->accuracy = (100*correct)/(correct+wrong);
-	printf("accuracy: %d", ptr->accuracy);
+	printf("timetaken: %lf\n", timetaken);
+	ptr->accuracy = (float)(100*correct)/(correct+wrong);
+	printf("accuracy: %lf", ptr->accuracy);
 	printf("%%");
 	printf("\n\n");
 	store(ptr);
 }
 
-void knowmore(){
-}
+void knowmore(){}
 
 void nextwork(){
 	int c;
-	printf("Do you want to continue?(1=Yes/0=No)");
+	printf("Do you want to continue?(1=yes | 2=no)");
 	scanf("%d", &c);
 	switch(c){
 		case 1: begin();
 			break;
-		case 0: choices();
+		case 2: choices();
 			break;
 		default:printf("wrong input");
 			nextwork();
