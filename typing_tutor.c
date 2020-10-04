@@ -39,8 +39,8 @@ void progress(){};
 
 void choices(){
 	int c;
-	printf("\n\nPress 1 to begin.\nPress 2 to view your progress.\nPress 3 to erase all progress\nPress 4 to know more about our workspace.\n\n");
 	
+	printf("\n\nPress 1 to begin.\nPress 2 to view your progress.\nPress 3 to erase all progress\nPress 4 to know more about our workspace.\n\n");
 	scanf("%d", &c);
 	switch(c){
         	case 1: begin();
@@ -61,6 +61,7 @@ void begin(){
 	clock_t start, end;
 	char a[100], c ;
 	char b[] = "HELLO TYPING TUTOR";
+	
 	printf("enter the following words as it is as fast as you can:\n");
 	sleep(2);
 	getchar();
@@ -83,6 +84,7 @@ void begin(){
 void calculate(int correct,int wrong,int timetaken){
 	int per;
 	report *ptr;
+	
 	ptr = (report*)malloc(sizeof(report*));
 	ptr->timetaken = timetaken;
 	printf("Right letters: %d\n", correct);
@@ -100,6 +102,7 @@ void knowmore(){
 
 void nextwork(){
 	int c;
+	
 	printf("Do you want to continue?(1=Yes/0=No)");
 	scanf("%d", &c);
 	switch(c){
