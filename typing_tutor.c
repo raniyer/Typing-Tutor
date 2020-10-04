@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include <unistd.h>
 
 typedef struct report{
@@ -10,7 +10,7 @@ typedef struct report{
 	struct report *next;
 }report;
 
-report *head =NULL;
+report *head = NULL;
 
 void calculate(int ,int ,int);
 void begin();
@@ -19,18 +19,19 @@ void nextwork();
 void choices();
 void store(report *);
 
-void store(report *ptr){
+void store(report *ptr)
+{
 	head = ptr;
-	head->next = NULL;
-	head = head->next;	
+	head = NULL;	
 }
 
-int homepage(void){
+int homepage(void)
+{
 	printf("WELCOME TO THE TYPING TUTOR!!");
 	sleep(2);
-	printf("\n\nHere, we will work on your typing speed make you better and more accurate typist.");
-	printf("\n\nlet's start our journey to rise as the best typist of all times.");
-	printf("\n\nare you ready to begin?\n");
+	printf("\n\nHere, we will work on your typing speed make you a better typist.");
+	printf("\n\nLet's start our journey to rise as the best typist of all times.");
+	printf("\n\nAre you ready to begin?\n");
 	choices();
 	
 }
@@ -38,10 +39,11 @@ int homepage(void){
 void freemem(){};
 void progress(){};
 
-void choices(){
+void choices()
+{
 	int c;
-	printf("\n\npress 1 to begin.\npress 2 to view your progress.\n press 3 to erase all progress\npress 4 to know more about our workspace.\n\n");
 	
+	printf("\n\nPress 1 to begin.\nPress 2 to view your progress.\nPress 3 to erase all progress\nPress 4 to know more about our workspace.\n\n");
 	scanf("%d", &c);
 	switch(c){
         	case 1: begin();
@@ -52,16 +54,18 @@ void choices(){
 			break;
         	case 4: knowmore();
                 	break;
-        	default:printf("please enter a valid option");
+        	default:printf("Please enter a valid option");
 			choices();
     	}
 }
 
-void begin(){
+void begin()
+{
 	int correct=0, wrong=0, i, x, timetaken;
 	clock_t start, end;
 	char a[100], c ;
-	char b[]="HELLO TYPING TUTOR";
+	char b[] = "HELLO TYPING TUTOR";
+	
 	printf("enter the following words as it is as fast as you can:\n");
 	sleep(2);
 	getchar();
@@ -70,21 +74,23 @@ void begin(){
 	scanf(" %[^\n]s", a);
 	end= clock();
 	x = strlen(b);
-	for(i=0; i<x; i++){
-	        if (a[i]==b[i])
+	for(i = 0 ; i < x ; i++){
+	        if (a[i] == b[i])
 	            correct++;
 	        else
 	            wrong++;
 	}
-	timetaken = (int)(end-start)/CLOCKS_PER_SEC;
+	timetaken = (int)(end-start) / CLOCKS_PER_SEC;
 	calculate(correct, wrong, timetaken);
 	nextwork();
 }
 
-void calculate(int correct,int wrong,int timetaken){
+void calculate(int correct,int wrong,int timetaken)
+{
 	int per;
 	report *ptr;
-	ptr =(report*)malloc(sizeof(report*));
+	
+	ptr = (report*)malloc(sizeof(report*));
 	ptr->timetaken = timetaken;
 	printf("Right letters: %d\n", correct);
 	printf("wrong letters: %d\n", wrong);
@@ -96,11 +102,14 @@ void calculate(int correct,int wrong,int timetaken){
 	store(ptr);
 }
 
-void knowmore(){
+void knowmore()
+{
 }
 
-void nextwork(){
+void nextwork()
+{
 	int c;
+	
 	printf("Do you want to continue?(1=Yes/0=No)");
 	scanf("%d", &c);
 	switch(c){
@@ -113,7 +122,8 @@ void nextwork(){
 	}
 }
 
-int main(void){
+int main(void)
+{
         homepage();
         return 0;
 }
