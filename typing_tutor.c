@@ -21,8 +21,7 @@ void store(report *);
 
 void store(report *ptr){
 	head = ptr;
-	head->next = NULL;
-	head = head->next;	
+	head = NULL;	
 }
 
 int homepage(void){
