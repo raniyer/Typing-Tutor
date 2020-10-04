@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include <unistd.h>
 
 typedef struct report{
@@ -10,7 +10,7 @@ typedef struct report{
 	struct report *next;
 }report;
 
-report *head =NULL;
+report *head = NULL;
 
 void calculate(int ,int ,int);
 void begin();
@@ -61,7 +61,7 @@ void begin(){
 	int correct=0, wrong=0, i, x, timetaken;
 	clock_t start, end;
 	char a[100], c ;
-	char b[]="HELLO TYPING TUTOR";
+	char b[] = "HELLO TYPING TUTOR";
 	printf("enter the following words as it is as fast as you can:\n");
 	sleep(2);
 	getchar();
@@ -70,13 +70,13 @@ void begin(){
 	scanf(" %[^\n]s", a);
 	end= clock();
 	x = strlen(b);
-	for(i=0; i<x; i++){
-	        if (a[i]==b[i])
+	for(i = 0 ; i < x ; i++){
+	        if (a[i] == b[i])
 	            correct++;
 	        else
 	            wrong++;
 	}
-	timetaken = (int)(end-start)/CLOCKS_PER_SEC;
+	timetaken = (int)(end-start) / CLOCKS_PER_SEC;
 	calculate(correct, wrong, timetaken);
 	nextwork();
 }
@@ -84,7 +84,7 @@ void begin(){
 void calculate(int correct,int wrong,int timetaken){
 	int per;
 	report *ptr;
-	ptr =(report*)malloc(sizeof(report*));
+	ptr = (report*)malloc(sizeof(report*));
 	ptr->timetaken = timetaken;
 	printf("Right letters: %d\n", correct);
 	printf("wrong letters: %d\n", wrong);
