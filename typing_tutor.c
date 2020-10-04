@@ -19,12 +19,14 @@ void nextwork();
 void choices();
 void store(report *);
 
-void store(report *ptr){
+void store(report *ptr)
+{
 	head = ptr;
 	head = NULL;	
 }
 
-int homepage(void){
+int homepage(void)
+{
 	printf("WELCOME TO THE TYPING TUTOR!!");
 	sleep(2);
 	printf("\n\nHere, we will work on your typing speed make you a better typist.");
@@ -37,7 +39,8 @@ int homepage(void){
 void freemem(){};
 void progress(){};
 
-void choices(){
+void choices()
+{
 	int c;
 	
 	printf("\n\nPress 1 to begin.\nPress 2 to view your progress.\nPress 3 to erase all progress\nPress 4 to know more about our workspace.\n\n");
@@ -56,7 +59,8 @@ void choices(){
     	}
 }
 
-void begin(){
+void begin()
+{
 	int correct=0, wrong=0, i, x, timetaken;
 	clock_t start, end;
 	char a[100], c ;
@@ -81,7 +85,8 @@ void begin(){
 	nextwork();
 }
 
-void calculate(int correct,int wrong,int timetaken){
+void calculate(int correct,int wrong,int timetaken)
+{
 	int per;
 	report *ptr;
 	
@@ -97,10 +102,12 @@ void calculate(int correct,int wrong,int timetaken){
 	store(ptr);
 }
 
-void knowmore(){
+void knowmore()
+{
 }
 
-void nextwork(){
+void nextwork()
+{
 	int c;
 	
 	printf("Do you want to continue?(1=Yes/0=No)");
@@ -115,7 +122,8 @@ void nextwork(){
 	}
 }
 
-int main(void){
+int main(void)
+{
         homepage();
         return 0;
 }
