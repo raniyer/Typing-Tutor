@@ -27,9 +27,9 @@ void store(report *ptr){
 int homepage(void){
 	printf("WELCOME TO THE TYPING TUTOR!!");
 	sleep(2);
-	printf("\n\nHere, we will work on your typing speed make you better and more accurate typist.");
-	printf("\n\nlet's start our journey to rise as the best typist of all times.");
-	printf("\n\nare you ready to begin?\n");
+	printf("\n\nHere, we will work on your typing speed make you a better typist.");
+	printf("\n\nLet's start our journey to rise as the best typist of all times.");
+	printf("\n\nAre you ready to begin?\n");
 	choices();
 	
 }
@@ -39,7 +39,7 @@ void progress(){};
 
 void choices(){
 	int c;
-	printf("\n\npress 1 to begin.\npress 2 to view your progress.\n press 3 to erase all progress\npress 4 to know more about our workspace.\n\n");
+	printf("\n\nPress 1 to begin.\nPress 2 to view your progress.\nPress 3 to erase all progress\nPress 4 to know more about our workspace.\n\n");
 	
 	scanf("%d", &c);
 	switch(c){
@@ -51,7 +51,7 @@ void choices(){
 			break;
         	case 4: knowmore();
                 	break;
-        	default:printf("please enter a valid option");
+        	default:printf("Please enter a valid option");
 			choices();
     	}
 }
